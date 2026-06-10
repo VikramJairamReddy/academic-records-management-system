@@ -1,0 +1,2 @@
+S,Chris Doe,A12345678,Computer Science,3.8,CS1113;CS2133
+F,Christopher,A87654321,Computer Science,90000.0

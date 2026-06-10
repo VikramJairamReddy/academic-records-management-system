@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"logic","l":"Controller"},{"p":"logic","l":"DisplayPanel"},{"p":"logic","l":"Faculty"},{"p":"logic","l":"Frame"},{"p":"logic","l":"InputPanel"},{"p":"logic","l":"MainPanel"},{"p":"logic","l":"MenuOptions"},{"p":"logic","l":"Person"},{"p":"logic","l":"Student"}];updateSearchResults();
