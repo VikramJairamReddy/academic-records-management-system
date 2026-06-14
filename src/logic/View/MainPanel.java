@@ -10,30 +10,41 @@
  * @author Ganta Vikram Jairam Reddy
  **/
 
-package logic;
+package logic.View;
 
+import java.util.List;
 import javax.swing.*;
+import logic.Controller.*;
+import logic.Model.*;
 
 public class MainPanel extends JPanel {
     private Controller controller;
     private DisplayPanel dispPanel;
     private InputPanel inputPanel;
 
+    private JButton addButton, searchButton, deleteButton, updateButton;
+    private JComboBox<String> filters;
+
     public MainPanel(Controller controller, DisplayPanel dispPanel, InputPanel inputPanel) {
         this.controller = controller;
         this.dispPanel = dispPanel;
         this.inputPanel = inputPanel;
 
-        JButton addButton = new JButton("Add");
-        JButton searchButton = new JButton("Search ID");
-        JButton deleteButton = new JButton("Delete ID");
-        JButton updateButton = new JButton("Update ID");
+        addButton = new JButton("Add");
+        searchButton = new JButton("Search");
+        deleteButton = new JButton("Delete ID");
+        updateButton = new JButton("Update ID");
+        filters = new JComboBox<>(new String[] {
+            FilterType.ALL, FilterType.STUDENTS, FilterType.FACULTY, 
+            FilterType.SORT_NAME, FilterType.SORT_GPA, FilterType.SORT_SALARY});
+
 
         // ADD
         addButton.addActionListener(e -> {
             try {
                 String name = this.inputPanel.getNameText();
                 String id = this.inputPanel.getIdText();
+                if(id != null) id = id.toUpperCase();
                 String type = this.inputPanel.getType();
 
                 if(type.equalsIgnoreCase("Student")) {
@@ -46,7 +57,11 @@ public class MainPanel extends JPanel {
                         StringBuilder courses = new StringBuilder();
 
                         for(String course : rawCourses) {
-                            courses.append(course.trim()).append(";");
+                            String c = course.trim();
+                            if(!c.isEmpty()) {
+                                if(courses.length() > 0) courses.append(";");
+                                courses.append(c);
+                            }
                         }
 
                         added = controller.addPerson(new Student(name, id, gpa, major, courses.toString()));
@@ -80,19 +95,41 @@ public class MainPanel extends JPanel {
 
         // SEARCH 
         searchButton.addActionListener(e -> {
-            String id = JOptionPane.showInputDialog("Enter ID to Search:");
-            Person p = this.controller.findPerson(id);
-            if(p != null) { 
-                dispPanel.showSingle(p);
+            String input = JOptionPane.showInputDialog("Enter ID or Name to Search:");
+
+            if(input == null || input.trim().isEmpty()) {
+                return;
             }
+
+            List<Person> results = this.controller.searchPerson(input.trim());
+
+            if(results.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No records found.");
+            } 
+            else if(results.size() == 1) {
+                dispPanel.showSingle(results.get(0));
+            } 
             else {
-                JOptionPane.showMessageDialog(this, "Not Found");
+                StringBuilder sb = new StringBuilder();
+                sb.append("--- SEARCH RESULTS ---\n\n");
+
+                for(Person p : results) {
+                    sb.append(p.getDetails()).append("\n");
+                    sb.append("--------------------------------\n");
+                }
+
+                dispPanel.dispText(sb.toString());
             }
         });
 
         // DELETE
         deleteButton.addActionListener(e -> {
             String id = JOptionPane.showInputDialog("Enter ID to delete:");
+            if(id == null || id.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "ID cannot be empty.");
+                return;
+            }
+            id = id.trim().toUpperCase();
             if(this.controller.deletePerson(id)) {
                 dispPanel.updateView();
                 controller.saveFile();
@@ -106,12 +143,14 @@ public class MainPanel extends JPanel {
         // UPDATE
         updateButton.addActionListener(e -> {
             String id = JOptionPane.showInputDialog("Enter ID to update:");
-            if (id == null || id.trim().isEmpty()) {
+            if(id == null || id.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "ID cannot be empty.");
                 return;
             }
 
+            id = id.trim().toUpperCase();
             Person p = this.controller.findPerson(id);
+
             if(p == null) {
                 JOptionPane.showMessageDialog(this, "Record not found with ID: " + id, "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -147,7 +186,7 @@ public class MainPanel extends JPanel {
 
                 if(choice.equalsIgnoreCase("Clear All Courses")) {
                     Student s = (Student) p;
-                    s.getCourses().clear();
+                    s.clearCourses();;
 
                     this.controller.saveFile();
                     this.dispPanel.updateView();
@@ -170,12 +209,13 @@ public class MainPanel extends JPanel {
                         case "Name": controller.updateName(currentId, newValue);
                                     break;
                         case "ID":
-                            if(!newValue.equalsIgnoreCase(currentId) && controller.findPerson(newValue) != null) {
+                            String newId = newValue.trim().toUpperCase();
+                            if(!newId.equalsIgnoreCase(currentId) && controller.findPerson(newId) != null) {
                                 JOptionPane.showMessageDialog(this, "Error: This new ID is already taken");
                                 continue;
                             }
-                            controller.updateId(currentId, newValue);
-                            currentId = newValue; 
+                            controller.updateId(currentId, newId);
+                            currentId = newId; 
                             break;
                         case "Major": controller.updateMajor(currentId, newValue);
                             break;
@@ -212,9 +252,32 @@ public class MainPanel extends JPanel {
             }
         });
 
+        filters.addActionListener(e -> {
+
+            String choice = (String) filters.getSelectedItem();
+            List<Person> list = controller.getFilterList(choice);
+        
+            StringBuilder sb = new StringBuilder();
+        
+            if(list.isEmpty()) {
+                sb.append("No records found.");
+            } 
+            else {
+                sb.append("--- FILTER RESULTS ---\n\n");
+                for(Person p : list) {
+                    sb.append(p.getDetails());
+                    sb.append("\n--------------------------------\n");
+                }
+            }
+        
+            dispPanel.dispText(sb.toString());
+        });
+
         add(addButton); 
         add(updateButton);
         add(searchButton); 
         add(deleteButton);
+        add(new JLabel("Filter: "));
+        add(filters);
     }
 }

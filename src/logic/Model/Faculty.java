@@ -6,7 +6,7 @@
  * @author Ganta Vikram Jairam Reddy
  **/
 
-package logic;
+package logic.Model;
 
 public class Faculty extends Person {
     private String department;
@@ -48,6 +48,6 @@ public class Faculty extends Person {
     @Override
     public String getDetails() {
         return "Faculty | Name: " + getName() + "| ID: " + getId() + " | Department: " + getDepartment() + 
-        " | Salary: " + getSalary();
+        " | Salary: " + String.format("%.2f", getSalary());
     }
 }

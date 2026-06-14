@@ -1,2 +1,33 @@
-S,Chris Doe,A12345678,Computer Science,3.8,CS1113;CS2133
-F,Christopher,A87654321,Computer Science,90000.0
+S,John Smith,A10000001,Computer Science,3.92,None
+S,Emma Davis,A10000002,Biology,3.75,BIO1114;CHEM1314
+S,Liam Wilson,A10000003,Mathematics,3.65,MATH2144;STAT2013
+S,Olivia Brown,A10000004,Physics,3.88,PHYS2114;MATH2233
+S,Noah Taylor,A10000005,Engineering,3.45,ENGR1111;ENGR1411
+S,Ava Anderson,A10000006,Chemistry,3.91,CHEM1415;CHEM1515
+S,James Thomas,A10000007,Computer Science,3.55,CS1113;CS2433
+S,Sophia Jackson,A10000008,English,3.8,ENGL1113;ENGL1213
+S,Benjamin White,A10000009,History,3.4,HIST1103;HIST1483
+S,Isabella Harris,A10000010,Psychology,3.95,PSYC1113;PSYC2583
+S,Lucas Martin,A10000011,Computer Science,3.67,CS1113;CS2133
+S,Mia Thompson,A10000012,Finance,3.82,FIN3113;ECON2103
+S,Henry Garcia,A10000013,Accounting,3.5,ACCT2103;ACCT2203
+S,Charlotte Martinez,A10000014,Marketing,3.76,MKTG3213;ECON2103
+S,Alexander Robinson,A10000015,Computer Science,4.0,CS2433;CS3443
+F,Dr. Robert King,A20000001,Computer Science,95000.0
+F,Dr. Linda Scott,A20000002,Biology,89000.0
+F,Dr. Michael Green,A20000003,Mathematics,92000.0
+F,Dr. Patricia Baker,A20000004,Physics,98000.0
+F,Dr. William Adams,A20000005,Engineering,105000.0
+F,Dr. Jennifer Nelson,A20000006,Chemistry,91000.0
+F,Dr. David Carter,A20000007,History,83000.0
+F,Dr. Susan Mitchell,A20000008,English,86000.0
+F,Dr. Joseph Perez,A20000009,Psychology,94000.0
+F,Dr. Karen Roberts,A20000010,Finance,97000.0
+F,Dr. Daniel Turner,A20000011,Accounting,88000.0
+F,Dr. Nancy Phillips,A20000012,Marketing,90000.0
+F,Dr. Christopher Campbell,A20000013,Computer Science,112000.0
+F,Dr. Jessica Parker,A20000014,Biology,93000.0
+F,Dr. Matthew Evans,A20000015,Engineering,108000.0
+F,Dr Brown,A87654321,Mathematics,100000.0
+S,John,A12345678,CS,3.8,CS1113
+S,Mary,A12345678,Biology,3.9,BIO1114

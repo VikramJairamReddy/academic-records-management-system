@@ -18,10 +18,20 @@ and the MVC (Model-View-Controller) architecture.
 ## Technologies Used
 
 * Java
-* Java Swing
+* Java Swing GUI
 * MVC Architecture
-* Object-Oriented Programming
-* File I/O
+  - Model
+  - View
+  - Controller
+* Object-Oriented Programming (OOP)
+  - Abstraction
+  - Encapsulation
+  - Inheritance
+  - Polymorphism
+* Java Collections Framework
+  - HashMap
+  - ArrayList
+* File I/O using Java NIO
 * Exception Handling
 
 ## Class Structure
@@ -43,6 +53,13 @@ and the MVC (Model-View-Controller) architecture.
 ### Controller
 
 * Controller
+
+## Edge Case Handling
+
+* Preventing loading duplicate values by skipping them
+* Skipping corrupted data
+* Handling invalid GPA and Salary
+* Empty input valiation
 
 ## Screenshots
 
@@ -73,6 +90,6 @@ and the MVC (Model-View-Controller) architecture.
 
 ## Author
 
-Ganta Vikram Jairam Reddy
-Oklahoma State University
-Computer Science
+Ganta Vikram Jairam Reddy.
+Oklahoma State University.
+Computer Science.

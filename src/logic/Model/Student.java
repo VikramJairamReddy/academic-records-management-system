@@ -6,7 +6,7 @@
  * @author Ganta Vikram Jairam Reddy
  **/
 
-package logic;
+package logic.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,8 @@ public class Student extends Person {
         setGpa(gpa);
         enrolledCourses = new ArrayList<>();
         
-        if (courses != null && !courses.equalsIgnoreCase("none") && !courses.trim().isEmpty()) {
-            for (String course : courses.split(";")) {
+        if(courses != null && !courses.equalsIgnoreCase("none") && !courses.trim().isEmpty()) {
+            for(String course : courses.split(";")) {
                 addCourses(course.trim());
             }
         }
@@ -48,7 +48,7 @@ public class Student extends Person {
     }
 
     public void setGpa(double gpa) {
-        if (gpa < 0.0 || gpa > 4.0) {
+        if(gpa < 0.0 || gpa > 4.0) {
             throw new IllegalArgumentException("GPA must be between 0.0 and 4.0");
         }
         
@@ -81,17 +81,26 @@ public class Student extends Person {
     }
 
     public List<String> getCourses() {
-        return enrolledCourses;
+        return new ArrayList<>(enrolledCourses);
+    }
+
+    /**
+    * Removes all enrolled courses from the student
+    */
+    public void clearCourses() {
+        enrolledCourses.clear();
     }
 
     // Override's the getDetails method to provide a formatted string representation 
     // of the student's details
     @Override
     public String getDetails(){
+        String courses = (enrolledCourses.isEmpty())? "None" : String.join(", ", enrolledCourses);
+
         return "Student | Name: " + getName() + 
         "| ID: " + getId() + 
         " | Major: " + getMajor() + 
-        " | GPA: " + getGpa() +
-        " | Courses: " + String.join(", ", enrolledCourses);
+        " | GPA: " + String.format("%.2f", getGpa()) +
+        " | Courses: " + courses;
     }
 }

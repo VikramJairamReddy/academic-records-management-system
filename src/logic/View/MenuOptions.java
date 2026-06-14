@@ -5,9 +5,10 @@
  * 
  * @author Ganta Vikram Jairam Reddy
  **/
-package logic;
+package logic.View;
 
 import javax.swing.*;
+import logic.Controller.Controller;
 
 public class MenuOptions extends JMenuBar {
     private Controller controller;
@@ -40,25 +41,24 @@ public class MenuOptions extends JMenuBar {
             }
         });
 
-        clearItem.addActionListener(e -> {
-            frame.refreshInput(); 
-        });
+        clearItem.addActionListener(e -> frame.refreshInput());
 
-        refreshView.addActionListener(e -> {
-            frame.refreshDisplay(); 
-        });
+        refreshView.addActionListener(e -> frame.refreshDisplay());
 
         deleteItem.addActionListener(e -> {
             String id = JOptionPane.showInputDialog(frame, "Enter OSU ID to Delete (A12345678):");
-            if(id != null) {
-                if(controller.deletePerson(id)) {
-                    frame.refreshDisplay();
-                    controller.saveFile();
-                    JOptionPane.showMessageDialog(frame, "Record Deleted Successfully.");
-                } 
-                else {
-                    JOptionPane.showMessageDialog(frame, "Error: ID not found.");
-                }
+            if(id == null || id.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "ID cannot be empty.");
+                return;
+            }
+            id = id.trim().toUpperCase();
+            if(controller.deletePerson(id)) {
+                frame.refreshDisplay();
+                controller.saveFile();
+                JOptionPane.showMessageDialog(frame, "Record Deleted Successfully.");
+            } 
+            else {
+                JOptionPane.showMessageDialog(frame, "Error: ID not found.");
             }
         });
 
@@ -89,7 +89,7 @@ public class MenuOptions extends JMenuBar {
 
     // Method to handle loading data through the controller and refreshing the display
     private void handleLoad() {
-        try {
+        try { 
             controller.loadData();
             frame.refreshDisplay(); 
             JOptionPane.showMessageDialog(frame, "Data Loaded successfully!");

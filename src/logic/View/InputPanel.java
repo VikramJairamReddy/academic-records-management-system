@@ -6,7 +6,7 @@
  * @author Ganta Vikram Jairam Reddy
  **/
 
-package logic;
+package logic.View;
 
 import javax.swing.*;
 import java.awt.*;

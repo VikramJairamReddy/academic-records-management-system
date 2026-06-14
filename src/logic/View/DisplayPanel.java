@@ -7,9 +7,13 @@
  *
  * @author Ganta Vikram Jairam Reddy
  **/
-package logic;
+package logic.View;
 
 import javax.swing.*;
+
+import logic.Controller.Controller;
+import logic.Model.Person;
+
 import java.awt.*;
 
 public class DisplayPanel extends JPanel {
@@ -39,5 +43,14 @@ public class DisplayPanel extends JPanel {
     // Method to display a single person's details in the text area
     public void showSingle(Person p) {
         textArea.setText("--- SEARCH RESULT ---\n\n" + p.getDetails());
+    }
+
+    /**
+     * Displays custom text inside the text area
+     *
+     * @param text formatted text to display
+     */
+    public void dispText(String text) {
+        textArea.setText(text);
     }
 }

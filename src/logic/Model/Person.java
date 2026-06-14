@@ -6,7 +6,7 @@
  * @author Ganta Vikram Jairam Reddy
  **/
 
-package logic;
+package logic.Model;
 
 public abstract class Person {
     private String name, id;
@@ -28,20 +28,10 @@ public abstract class Person {
 
     // ID setter with validation logic to ensure ID is in the correct format
     public void setId(String id){
-        if(id == null || id.length() != 9 || !id.startsWith("A") || !checkId(id.substring(1))) {
+        if(id == null || !id.matches("A\\d{8}")) {
             throw new IllegalArgumentException("OSU ID must start with 'A' followed by 8 digits.");
         }
         this.id = id;
-    }
-
-    // Helper method to check if the ID contains only digits after the initial 'A'
-    private boolean checkId(String str) {
-        for(char c : str.toCharArray()) {
-            if(!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     // Getters for name and ID

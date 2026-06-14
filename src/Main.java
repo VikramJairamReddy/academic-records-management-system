@@ -9,7 +9,9 @@
  * @author Ganta Vikram Jairam Reddy
  **/
 
-import logic.*;
+import logic.Controller.Controller;
+import logic.View.Frame;
+
 import javax.swing.SwingUtilities;
 
 public class Main {

@@ -6,8 +6,9 @@
  * @author Ganta Vikram Jairam Reddy
  **/
 
-package logic;
+package logic.View;
 
+import logic.Controller.Controller;
 import javax.swing.*;
 import java.awt.*;
 
